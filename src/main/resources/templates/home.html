@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
+
+        .card{
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            width:350px;
+            text-align:center;
+            box-shadow:0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        h1{
+            margin-bottom:15px;
+        }
+
+        p{
+            color:#555;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:16px;
+            margin-top:20px;
+            background:#dc2626;
+            color:white;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1 id="welcome">
+        Bienvenida
+    </h1>
+
+    <p>Sesión iniciada correctamente</p>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+<script>
+
+    async function cargarUsuario(){
+
+        const response =
+            await fetch("/auth/profile");
+
+        const text =
+            await response.text();
+
+        document.getElementById(
+            "welcome"
+        ).innerText = text;
+    }
+
+    async function logout(){
+
+        await fetch("/auth/logout");
+
+        window.location.href =
+            "/login-page";
+    }
+
+    cargarUsuario();
+
+</script>
+
+</body>
+</html>
